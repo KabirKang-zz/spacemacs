@@ -305,10 +305,17 @@ before packages are loaded. If you are unsure, you should try in setting them in
   )
 
 (defun dotspacemacs/user-config ()
+  ;; Icons
   (setq all-the-icons-color-icons t)
   (setq all-the-icons-for-buffer t)
   (setq neo-theme 'icons)
   (add-hook 'dired-mode-hook 'all-the-icons-dired-mode)
+
+  ;; js2
+  (setq-default js2-strict-trailing-comma-warning nil)
+
+  (my-personal-indents 2)
+
   "Configuration function for user code.
 This function is called at the very end of Spacemacs initialization after
 layers configuration.
@@ -316,6 +323,21 @@ This is the place where most of your configurations should be done. Unless it is
 explicitly specified that a variable should be set before a package is loaded,
 you should place your code here."
   )
+
+(defun my-personal-indents (n)
+  (setq indent-tabs-mode nil) ; use space instead of tab
+  (setq c-basic-offset n)
+  ;; web lang indents
+  (setq javascript-indent-level n) ; javascript-mode
+  (setq js-indent-level n) ; js-mode
+  (setq js2-basic-offset n) ; js2-mode, in latest js2-mode, it's alias of js-indent-level
+  (setq web-mode-markup-indent-offset n) ; web-mode, html tag in html file
+  (setq web-mode-css-indent-offset n) ; web-mode, css in html file
+  (setq web-mode-code-indent-offset n) ; web-mode, js code in html file
+  (setq web-mode-attr-indent-offset n)
+  (setq css-indent-offset n) ; css-mode
+  )
+
 
 ;; Do not write anything past this comment. This is where Emacs will
 ;; auto-generate custom variable definitions.
